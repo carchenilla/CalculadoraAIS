@@ -272,6 +272,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         this.operationField.setText("0");
         this.nonePulsed = true;
+        this.pointPulsed=false;
+        this.errorCount=0;
     }//GEN-LAST:event_clearButtonActionPerformed
 
     
