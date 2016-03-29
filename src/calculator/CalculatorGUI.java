@@ -103,6 +103,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         plusButton.setBackground(new java.awt.Color(245, 146, 61));
         plusButton.setText("+");
+        plusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opButtonActionPerformed(evt);
+            }
+        });
 
         fourButton.setText("4");
         fourButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +132,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         minusButton.setBackground(new java.awt.Color(245, 146, 61));
         minusButton.setText("-");
+        minusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opButtonActionPerformed(evt);
+            }
+        });
 
         sevenButton.setText("7");
         sevenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +160,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         productButton.setBackground(new java.awt.Color(245, 146, 61));
-        productButton.setText("X");
+        productButton.setText("x");
+        productButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opButtonActionPerformed(evt);
+            }
+        });
 
         clearButton.setText("C");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +176,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         divButton.setBackground(new java.awt.Color(245, 146, 61));
         divButton.setText("÷");
+        divButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,6 +303,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void pointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointButtonActionPerformed
         if (this.pointPulsed){
             this.errorCount++;
+            System.out.println("error");
         }
         else{
             this.pointPulsed=true;
@@ -316,6 +337,32 @@ public class CalculatorGUI extends javax.swing.JFrame {
         this.errorCount=0;
     }//GEN-LAST:event_performOperation
 
+    
+    
+    
+    
+    //Accion de pulsar un boton de signo de operacion
+    //Controla que no se hayan pulsado dos signos consecutivos (ni operacion ni punto)
+    //tambien controla si el simbolo de operacion es la primera tecla que se pulsa
+    private void opButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opButtonActionPerformed
+        if (this.nonePulsed){
+            this.nonePulsed = false;
+            this.operationField.setText("0"+((JButton)evt.getSource()).getText());
+        }
+        else{
+            String prev = this.operationField.getText();
+            char c = prev.charAt(prev.length()-1);
+            if ((c=='+')||(c=='-')||(c=='x')||(c=='÷')||(c=='.')){
+                this.errorCount++;  
+                System.out.println("error");
+            }
+            String buttonName = ((JButton)evt.getSource()).getText();
+            this.operationField.setText(this.operationField.getText()+buttonName);
+            this.pointPulsed = false;
+        }
+    }//GEN-LAST:event_opButtonActionPerformed
+
+    
     
     //variables de control de errores y pulsacion de botones
     private boolean nonePulsed = true;
