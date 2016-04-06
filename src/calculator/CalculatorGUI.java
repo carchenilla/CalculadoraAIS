@@ -165,7 +165,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         productButton.setBackground(new java.awt.Color(245, 146, 61));
-        productButton.setText("x");
+        productButton.setText("*");
         productButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opButtonActionPerformed(evt);
@@ -380,7 +380,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         else{
             String prev = this.operationField.getText();
             char c = prev.charAt(prev.length()-1);
-            if ((c=='+')||(c=='-')||(c=='x')||(c=='÷')||(c=='.')){
+            if ((c=='+')||(c=='-')||(c=='*')||(c=='÷')||(c=='.')){
                 this.errorCount++;  
                 System.out.println("error");
             }
@@ -411,13 +411,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
             String prev = this.operationField.getText();
             char c = prev.charAt(prev.length()-1);
             if (buttonName.equals("(")){
-                if (!((c=='(')||(c=='+')||(c=='-')||(c=='x')||(c=='÷'))){
+                if (!((c=='(')||(c=='+')||(c=='-')||(c=='*')||(c=='÷'))){
                     this.errorCount++;
                     System.out.println("error");
                 }
             }
             else {
-                if ((c=='(')||(c=='+')||(c=='-')||(c=='x')||(c=='÷')){
+                if ((c=='(')||(c=='+')||(c=='-')||(c=='*')||(c=='÷')){
                     this.errorCount++;
                     System.out.println("error");
                 }
