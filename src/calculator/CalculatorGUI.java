@@ -358,7 +358,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
             this.operationField.setText("Syntax error");
         }
         else{
-            this.operationField.setText("operacion hecha chachimente");  
+            double res = OperationSolver.solve(this.operationField.getText());
+            this.operationField.setText(Double.toString(res));
         }
         this.nonePulsed=true;
         this.pointPulsed=false;
@@ -437,7 +438,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
     
     
     
-    
 
 
     /**
@@ -469,6 +469,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CalculatorGUI().setVisible(true);
             }
