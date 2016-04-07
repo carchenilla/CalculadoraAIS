@@ -360,11 +360,16 @@ public class CalculatorGUI extends javax.swing.JFrame {
     //Control de errores. Si durante la introduccion de los operandos hubo errores, 
     //se "tira" un syntax error y hay que meterlo todo de nuevo
     private void performOperation(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performOperation
+        
+        String op = this.operationField.getText();
+        if ((op.charAt(op.length()-1)!=')') || !(op.charAt(op.length()-1)>='0' && (op.charAt(op.length()-1)<='9'))){
+            this.errorCount++;
+        }
         if ((this.errorCount>0)||(rightPar!=leftPar)){
             this.operationField.setText("Syntax error");
         }
         else{
-            double res = OperationSolver.solve(this.operationField.getText());
+            double res = OperationSolver.solve(op);
             this.operationField.setText(Double.toString(res));
         }
         this.nonePulsed=true;
