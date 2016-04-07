@@ -310,6 +310,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
             this.nonePulsed = false;
             this.operationField.setText("");
         }
+        else{
+            char c = this.operationField.getText().charAt(this.operationField.getText().length()-1);
+            if (c==')'){
+                this.errorCount++;
+            }
+        }
         String buttonName = ((JButton)evt.getSource()).getText();
         this.operationField.setText(this.operationField.getText()+buttonName);
     }//GEN-LAST:event_digitButtonActionPerformed
