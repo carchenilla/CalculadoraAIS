@@ -362,8 +362,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void performOperation(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performOperation
         
         String op = this.operationField.getText();
-        if ((op.charAt(op.length()-1)!=')') || !(op.charAt(op.length()-1)>='0' && (op.charAt(op.length()-1)<='9'))){
-            this.errorCount++;
+        if (!(op.charAt(op.length()-1)>='0' && (op.charAt(op.length()-1)<='9'))){
+            if (op.charAt(op.length()-1)!=')'){
+                this.errorCount++;
+            }
         }
         if ((this.errorCount>0)||(rightPar!=leftPar)){
             this.operationField.setText("Syntax error");
