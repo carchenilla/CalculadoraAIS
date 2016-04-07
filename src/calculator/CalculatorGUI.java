@@ -310,6 +310,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
             this.nonePulsed = false;
             this.operationField.setText("");
         }
+        else{
+            char c = this.operationField.getText().charAt(this.operationField.getText().length()-1);
+            if (c==')'){
+                this.errorCount++;
+            }
+        }
         String buttonName = ((JButton)evt.getSource()).getText();
         this.operationField.setText(this.operationField.getText()+buttonName);
     }//GEN-LAST:event_digitButtonActionPerformed
@@ -354,11 +360,19 @@ public class CalculatorGUI extends javax.swing.JFrame {
     //Control de errores. Si durante la introduccion de los operandos hubo errores, 
     //se "tira" un syntax error y hay que meterlo todo de nuevo
     private void performOperation(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performOperation
+        
+        String op = this.operationField.getText();
+        if (!(op.charAt(op.length()-1)>='0' && (op.charAt(op.length()-1)<='9'))){
+            if (op.charAt(op.length()-1)!=')'){
+                this.errorCount++;
+            }
+        }
         if ((this.errorCount>0)||(rightPar!=leftPar)){
             this.operationField.setText("Syntax error");
         }
         else{
-            this.operationField.setText("operacion hecha chachimente");  
+            double res = OperationSolver.solve(op);
+            this.operationField.setText(Double.toString(res));
         }
         this.nonePulsed=true;
         this.pointPulsed=false;
@@ -437,7 +451,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
     
     
     
-    
 
 
     /**
@@ -469,6 +482,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CalculatorGUI().setVisible(true);
             }
