@@ -16,42 +16,45 @@ public class OperationSolver {
     private static Stack<Double> operands;
     
     public static double solve(String operation){
+        // 5 + 4 * 2
         operators = new Stack<>();
         operands = new Stack<>();
         
-        stackThings(operation);
-        
-        while(operands.size()>1){
-            double opB = operands.pop();
-            double opA = operands.pop();
-            char operator = operators.pop();
-            double result = doOperation(opA,opB,operator);
-            operands.push(result);
-        }
-        return operands.pop();
-    }
-    
-    private static void stackThings(String operation){
         boolean finished = false;
         while(!finished){
-            int i = 0;
-            while(i<operation.length() && (operation.charAt(i)>='0' && operation.charAt(i)<='9' || operation.charAt(i)=='.')){
-                i++;
+            int i = operation.length()-1;
+            while(i>=0 && (operation.charAt(i)>='0' && operation.charAt(i)<='9' || operation.charAt(i)=='.')){
+                i--;
             }
-            double num = Double.parseDouble(operation.substring(0, i));
-            operands.push(num);
-            try{
-                char op = operation.charAt(i);
-                operators.push(op);
-            }catch(IndexOutOfBoundsException ex){
-                //No hace falta recuperarse
-            }
-            if(i!=operation.length()){
-                operation = operation.substring(i+1,operation.length());
-            }else{
+            if(i==-1){
+                //Caso último número
+                operands.push(Double.parseDouble(operation));
                 finished = true;
+            }if(operation.charAt(i)=='('){
+            
+            }else{
+                operands.push(Double.parseDouble(operation.substring(i+1)));
+                char op = operation.charAt(i);
+                if(!operators.isEmpty()){
+                    char stackOp = operators.peek();
+                    switch(stackOp){
+                        case '*': case '÷':
+                            // 5 / 6
+                            operators.pop();
+                            double opA = operands.pop();
+                            double opB = operands.pop();
+                            double result = doOperation(opA,opB,stackOp);
+                            operands.push(result);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                operators.push(op);
+                operation = operation.substring(0,i);
             }
         }
+        return operands.pop();
     }
     
     private static double doOperation(double a, double b, char op){
