@@ -11,7 +11,7 @@ import java.util.Stack;
  *
  * @author Andres
  */
-public class OperationSolver {
+public class OperationSolverToDelete {
     private static Stack<Character> operators;
     private static Stack<Double> operands;
     
@@ -73,7 +73,7 @@ public class OperationSolver {
     }
     
     public static void main(String[] args){
-        double a = OperationSolver.solve("3+6*4-6");
+        double a = OperationSolverToDelete.solve("3+6*4-6");
         System.out.println(a);
     }
 }

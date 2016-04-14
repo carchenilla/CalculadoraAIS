@@ -371,7 +371,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
             this.operationField.setText("Syntax error");
         }
         else{
-            double res = new CarcheOperationSolver().solve(op);
+            double res = new FinalOperationSolver().solve(op);
             this.operationField.setText(Double.toString(res));
         }
         this.nonePulsed=true;

@@ -11,11 +11,11 @@ import java.util.Stack;
  *
  * @author Carche
  */
-public class CarcheOperationSolver {
+public class FinalOperationSolver {
     private Stack<Character> operators;
     private Stack<Double> operands;
     
-    public CarcheOperationSolver(){
+    public FinalOperationSolver(){
         // Pilas de operandos y operadores
         operators = new Stack<>();
         operands = new Stack<>();
@@ -38,7 +38,7 @@ public class CarcheOperationSolver {
             //Si es un parentesis cerrado, recursivamente empezamos a resover lo que haya dentro
             }else if(operation.charAt(i)==')'){
                 String newString = operation.substring(0,i);
-                Double newNum = new CarcheOperationSolver().solve(newString);
+                Double newNum = new FinalOperationSolver().solve(newString);
                 int simbolPos = findLeftPar(i,operation)-1; //Una vez obtenido lo de dentro, buscamos el simbolo de operacion que precede a los parentesis 
                 char newOp;
                 operands.push(newNum);  //Si tira excepcion al coger el simbolo es que los parentesis es lo que hay más a la izquierda de toda la cadena de entrada
@@ -135,7 +135,7 @@ public class CarcheOperationSolver {
     
     
     public static void main(String[] args){
-        double a = new CarcheOperationSolver().solve("3+6*4-6");
+        double a = new FinalOperationSolver().solve("3+6*4-6");
         System.out.println(a);
     }
 }
